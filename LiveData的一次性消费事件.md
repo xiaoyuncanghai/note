@@ -28,13 +28,16 @@ if (savedInstanceState != null) {
 ```
 再重新建立的时候, 无论WebView是放在Activity中的还是放在Fragment中的,WebView都可以恢复到离开时候的界面  
 
+相关链接:https://www.cnblogs.com/mengdd/p/5582244.html
 
 ###2: Fragment没有被销毁, 可是WebView为什么还是会发生变化?
 **问题分析**  
 onCreateView() -> onViewCreate() -> onResume()  
 这个是Fragment的基础的生命周期, 在onCreateView里面会加载视图, 在置于后台的时候, Fragment不会销毁.  
 所以在生命周期里面只会走一次.  那么既然只走了一次, onCreateView里面loadUrl加载资源的方法为什么会被触发呢?  
-来看代码:   
+来看代码:  
+ ![](https://github.com/xiaoyuncanghai/note/tree/master/image/live一次性消费事件.png)  
+
 
 ``` 
 lifecycleScope.launch(Dispatchers.Main) { 
